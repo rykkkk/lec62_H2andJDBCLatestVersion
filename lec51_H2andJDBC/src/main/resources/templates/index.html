@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+
+    <link rel="stylesheet" th:href="@{style/myStyle.css}">
+</head>
+
+
+<header>
+    <h1>Hello from index page!</h1>
+    <h2>H2 and JDBC</h2>
+    <h3>Here is our student list!</h3>
+    <p><a th:href="@{/h2-console}">HERE, GO TO THE CONSOLE</a></p>
+    <br>
+    <hr>
+</header>
+
+<body>
+<div>
+
+    <table th:if="${students != null && students !=''}">
+        <tr th:each="s:${students}">
+            <td th:text="${s.id}">1111</td>
+            <td th:text="${s.name}">John</td>
+            <td><a th:href="@{'/editStudentById/'+${s.id}}">EDIT</a></td>
+            <td><a th:href="@{'/deleteStudentById/'+${s.id}}">DELETE</a></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <form action="#" method="post" th:action="@{/insertStudent}" th:object="${myStudent}">
+                <td>
+                    <input th:field="*{id}" type="hidden">
+                    Name: <input th:field="*{name}" type="text"><br>
+                    <input type="submit" value="Go">
+                </td>
+            </form>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>
